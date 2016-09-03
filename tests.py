@@ -615,6 +615,11 @@ class TestOperations(unittest.TestCase):
             isinstance(s, six.integer_types)
             """)
 
+        # long(2)
+        self.check("long",
+            "x = long(1)",
+            "x = 1")
+
     def test_basestring(self):
         self.check("basestring",
             "isinstance(foo, basestring)",
@@ -1048,6 +1053,16 @@ class TestOperations(unittest.TestCase):
             first_key = list(x.keys())[0]
             first_value = list(x.values())[0]
             first_item = list(x.items())[0]
+            """)
+
+        self.check("dict0",
+            """
+            x1 = x.values()[1]
+            x123 = x.values()[123]
+            """,
+            """
+            x1 = list(x.values())[1]
+            x123 = list(x.values())[123]
             """)
 
     def test_dict_add(self):
